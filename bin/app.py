@@ -12,7 +12,7 @@ import shutil
 from stegano import lsb
 from stegano import exifHeader
 t = os.getcwd()
-API = open('../../keys/bstego.csv', 'rU') # two ../ for koding, two ../ for c9
+API = open('../keys/bstego.csv', 'rU') # two ../ for koding, two ../ for c9
 API = API.read()
 API = API[:-1]
 API_KEYS = API.split('\n')
