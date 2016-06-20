@@ -12,7 +12,7 @@ import shutil
 from stegano import lsb
 from stegano import exifHeader
 t = os.getcwd()
-API = open('../../keys/bstego.csv', 'rU')
+API = open('../../keys/bstego.csv', 'rU') # two ../ for koding, two ../ for c9
 API = API.read()
 API = API[:-1]
 API_KEYS = API.split('\n')
@@ -34,7 +34,9 @@ urls = (
 	'/account', 'account',
 	'/doesnotexist', 'doesnotexist',
 	'/encode', 'encode',
-	'/decode', 'decode'
+	'/decode', 'decode',
+	'/api', 'api',
+	'/about', 'about'
 )
 
 app = web.application(urls, globals())
@@ -171,6 +173,48 @@ class encode:
 			'''		
 		else:
 			return
+
+class decode:
+    def GET(self):
+        return render.makeanaccount()
+    def POST(self):
+        input = web.input(file={})
+        filename = input['file'].filename
+        fileds = input['file'].value
+        if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg') and filename.count('/') == -1:
+            os.chdir('static/files')
+            with open(filename, 'wb') as fout:
+                shutil.copyfileobj(input['file'].file, fout, 100000)
+            os.chdir('../../')
+            # do NOT touch above code
+            if filename.endswith('.png'):
+                return '''
+                <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <title>Attempted to Decode</title>
+                        <meta charset="utf-8">
+                    </head>
+                    <body>
+            '''+lsb.reveal("static/files/"+filename)+"<p>Message decoded should be above.</p></body></html>"
+            if filename.endswith('.jpg') or filename.endswith('.jpeg'):
+                return '''
+                <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <title>Attempted to Decode</title>
+                        <meta charset="utf-8">
+                    </head>
+                    <body>
+            '''+exifHeader.reveal("static/files/"+filename)+"<p>Message decoded should be above.</p></body></html>"
+    
+class api:
+    def GET(self):
+        return render.api()
+        
+class about:
+    def GET(self):
+        return render.about()
     
 def send_simple_message(email, username, url):
     return requests.post(
@@ -181,7 +225,7 @@ def send_simple_message(email, username, url):
               "subject": 'bStego registration',
               "html": "<b>Hey "+username+'''</b>,
                   My name is Jonathan. I'm the creator of bStego. Your unique passphrase is <b>'''+ url + '''</b> in case you forget.
-               You can now login <a href="https://bstego-jonw27.c9users.io/login">here</a>. Heres a :) on me. In the case that you did not sign up for bStego you should disregard this email, but (hopefully) check my project out!
+               You can now login <a href="http://jonathanwong.koding.io:8080/login">here</a>. Heres a :) on me. In the case that you did not sign up for bStego you should disregard this email, but (hopefully) check my project out!
                
                Thanks, Jonathan
                Please note that receiving emails has not been implemented on my server, so do not email me here. Please email me at <i>jwong24@stuy.edu</i>.
