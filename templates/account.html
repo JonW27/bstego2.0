@@ -1,0 +1,50 @@
+$def with (email, username, pictures, encoded, decoded)
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+			bStego
+		</title>
+		<meta charset="UTF-8">
+		<link href='/static/css/register.css' rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+		<style>
+		    .center {
+		        text-align: center;
+		    }
+		    p, input, button {
+		        font-size: 2vw;
+		    }
+		</style>
+	</head>
+	<body>
+		<h1 class="center">&gt;bStego</h1>
+		<h2 class="center">steganography at your fingertips</h2>
+		<h3 class="center">Currently supported: PNG, JPG</h3>
+		<p>Why might you want to use steganography? Steganography is better than encryption since it
+		    does not easily indicate that data is easily being hidden; one is less to suspect your meme as holding valuable data over weirdly 
+		    looking text. A 2010 Russian spy ring is the most recent example I can think of that uses steganography. Steganography can also be used for the 
+		    protection of your private property, hiding copyright text within your image that you can use as evidence in a legal case when someone steals your 
+		    image.
+		</p>
+		<p><b>Encode</b></p>
+		<form method="POST" action="/encode" enctype="multipart/form-data">
+		    File: <input type="file" name="file">
+		    <br>
+		    Message: <input type="text" name="message" placeholder="My secret message..." value=''>
+		    <button type="Submit">Encode</button>
+		</form>
+		<br>
+		<hr>
+		<p><b>Decode</b></p>
+		<form method="POST" action="/decode" enctype="multipart/form-data">
+		    File: <input type="file" name="file">
+		    <button type="Submit">Decode</button>
+		</form>
+		<br>
+		<h3>Stats</h3>
+		<p>Times encoded: $encoded</p>
+		<p>Times decoded: $decoded</p>
+	</body>
+</html>

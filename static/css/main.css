@@ -1,0 +1,51 @@
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 6vw;
+    margin-top: 50px;
+    /*Opera Mini is a loner */
+}
+
+h2 {
+    font-size: 3vw;
+}
+
+@keyframes chgenc {
+    from {color: white;}
+    to {color: rgba(0,0,0,0.8);}
+}
+
+@-webkit-keyframes chgenc {
+    from {color: white;}
+    to {color: rgba(0,0,0,0.8);}
+}
+
+#spec {
+    -webkit-animation: chgenc 3s;
+    animation: chgenc 3s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#top {
+    background: rgba(0,0,0,0.8);
+    color: rgba(255,255,253,1);
+    margin: 0 auto;
+    width: inherit;
+}
+
+a {
+    text-decoration:none;
+    margin-left: 50px;
+    color: blue;
+}
+
+a:hover {
+    text-decoration:underline;
+}

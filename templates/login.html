@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login to your Account</title>
+        <link href='/static/css/register.css' rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>
+            Login to your Account
+        </h1>
+        <form action='/account' method="POST" enctype="multipart/form-data">
+            <p>Email: </p> <input type="email" placeholder="janedoe@janescompany.com" value='' name="email" required>
+            <p>Username: </p><input type="text" placeholder="John Smith" value="" name="username" required>
+            <p>URL: </p><input type="password" placeholder="passphrase" value="" name="password" required>
+            <br>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
